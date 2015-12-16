@@ -26,11 +26,8 @@
   background-position: $sprite-offset-x  $sprite-offset-y;
 }
 
-@mixin sprite($sprite, $display: block) {
+@mixin sprite($sprite) {
   @include sprite-position($sprite);
-  background-repeat: no-repeat;
-  overflow: hidden;
-  display: $display;
   @include sprite-width($sprite);
   @include sprite-height($sprite);
 }
@@ -41,8 +38,12 @@
     {{#if dpi}}
     @media (-webkit-min-device-pixel-ratio: {{ratio}}), (min-resolution: {{dpi}}dpi) {
     {{/if}}
-    {{../../indicator}}{{cssesc ../classname}} {
+    %{{cssesc ../classname}} {
       background-image: url('{{escimage url}}');
+      background-repeat: no-repeat;
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: middle;
       {{#if dpi}}
       background-size: {{baseWidth}}px {{baseHeight}}px;
       {{/if}}
